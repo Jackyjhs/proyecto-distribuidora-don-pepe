@@ -1,0 +1,75 @@
+create database distribuidora_don_pepe
+go 
+use database distribuidora_don_pepe
+CREATE TABLE usuarios (
+    id_usuario INT PRIMARY KEY IDENTITY(1,1),
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    nombre_usuario VARCHAR(50) NOT NULL UNIQUE,
+    contrase�a_hash VARCHAR(255) NOT NULL,
+    rol VARCHAR(20) NOT NULL
+);
+
+Create Table Clientes (
+    id_Clientes int Primary Key identity (1,1) not null, 
+    Nombre Varchar (50) not null,
+    Apellido Varchar (50) not null,
+    Telefono Varchar (50) not null,
+    Direccion Varchar (100) not null,
+    Email Varchar (100)
+);
+
+Create Table Productos (
+    id_Productos int Primary Key identity (1,1) not null,
+    Nombre Varchar (50) not null, 
+    Descripcion varchar (50) not null,
+    Precio decimal (10,2) not null,
+    Stock int not null, 
+    Categoria varchar (50)
+);
+
+CREATE TABLE ventas (
+    id_venta INT PRIMARY KEY IDENTITY(1,1),
+    fecha DATETIME NOT NULL,
+    total DECIMAL(10, 2) NOT NULL,
+    metodo_pago VARCHAR(50),
+    id_cliente INT,
+    FOREIGN KEY (id_cliente) REFERENCES clientes(id_clientes)
+);
+
+CREATE TABLE detalle_venta (
+    id_detalle INT PRIMARY KEY IDENTITY(1,1),
+    id_venta INT NOT NULL,
+    id_producto INT NOT NULL,
+    cantidad INT NOT NULL,
+    precio_unitario DECIMAL(10, 2) NOT NULL,
+    subtotal DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (id_venta) REFERENCES ventas(id_venta),
+    FOREIGN KEY (id_producto) REFERENCES productos(id_productos)
+);
+
+insert into usuarios (nombre, apellido, nombre_usuario,contrase�a_hash,rol)
+values ('jesica', 'ventura','cajera', 1234, 'cajera')
+
+insert into Clientes (Nombre,Apellido, Telefono, Direccion, Email)
+values ('juan','cabrera','77777798','El salvador, S.S','juan@gmail.com')
+
+insert into Productos(Nombre,Descripcion,Precio,Stock,Categoria)
+values ('Coca-cola','lata ','0.75','50','bebeida en latada')
+
+Insert into ventas (fecha, total, metodo_pago, id_cliente)
+values ('12/05/2024','20','Efectivo','1')
+
+insert into detalle_venta(id_venta,id_producto, cantidad, precio_unitario,subtotal)
+values ('2','1','20','0.75','15')
+
+select * from usuarios 
+select * from Clientes
+select * FROM Productos
+select * from ventas
+select * from detalle_venta
+
+use distribuidora_don_pepe
+
+insert into Productos(Nombre,Descripcion,Precio,Stock,Categoria)
+values ('Pilsener','lata ','1.25','25','bebeida en latada')
