@@ -1,0 +1,6 @@
+@DistribuidoraDonPepe.API_HostAddress = http://localhost:5143
+
+GET {{DistribuidoraDonPepe.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
